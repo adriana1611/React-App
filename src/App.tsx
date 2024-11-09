@@ -1,20 +1,32 @@
 import { useState } from "react";
 import ItemList from "./ItemList";
 import Sidebar from "./Sidebar";
-import { shoppingItems } from "./data"; // Importing test data
+import { shoppingItems } from "./data"; 
 
 export default function MyApp() {
-  const [cartItems, setCartItems] = useState(shoppingItems); // Initialize with test data
+  // Initialize state with the test data
+  const [cartItems, setCartItems] = useState(shoppingItems);
 
+  // Add item to cart  by updating the state with a copy of the array
   const addItemToCart = () => {
     setCartItems(prevItems => [
       ...prevItems,
-      shoppingItems[prevItems.length % shoppingItems.length] // Add next item in the list
+      shoppingItems[prevItems.length % shoppingItems.length]
     ]);
   };
 
+  // Remove item from cart by filtering out the item with the specified id
   const removeItemFromCart = (id: number) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== id)); // Filter out item with matching id
+    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+  };
+
+  // Toggle the 'completed' property. Change it from true to false
+  const toggleCompleted = (id: number) => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id ? { ...item, completed: !item.completed } : item
+      )
+    );
   };
 
   return (
@@ -23,9 +35,12 @@ export default function MyApp() {
         <Sidebar addItemToCart={addItemToCart} />
       </div>
       <div className="flex-grow-1">
-        <ItemList items={cartItems} onDelete={removeItemFromCart} />
+        <ItemList
+          items={cartItems}
+          onDelete={removeItemFromCart}
+          onToggleCompleted={toggleCompleted}
+        />
       </div>
     </div>
   );
 }
-
