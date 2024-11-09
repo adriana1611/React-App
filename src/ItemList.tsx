@@ -1,15 +1,14 @@
 import ItemCard from "./ItemCard";
-import { shoppingItems } from './data';
 
-// ItemList component that displays a list of shopping items
-export default function ItemList() {
+export default function ItemList({ items, onDelete }: { items: { name: string; id: number }[], onDelete: (id: number) => void }) {
   return (
     <div className="p-3 bg-secondary vh-100">
-      <h3>Your shopping cart:</h3>
-      {shoppingItems.map((item) => (
-        <ItemCard key={item.id} itemName={item.name} />
+      <h3>Your Shopping Cart:</h3>
+      {items.map(item => (
+        <ItemCard key={item.id} itemName={item.name} itemId={item.id} onDelete={onDelete} />
       ))}
     </div>
   );
 }
+
 

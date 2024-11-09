@@ -1,12 +1,11 @@
 import AddButton from "./AddButton";
 import SidebarInput from "./SidebarInput";
 
-// Sidebar component that contains input and button elements for the user
-export default function Sidebar() {
-    return (
+export default function Sidebar({ addItemToCart }: { addItemToCart: () => void }) {
+  return (
     <div className="border-end bg-info p-3 text-white vh-100">  
-        <SidebarInput/>
-        <AddButton/>
+      <SidebarInput />
+      <AddButton onClick={addItemToCart} /> {/* Add item to cart */}
     </div>
-    )
+  );
 }
