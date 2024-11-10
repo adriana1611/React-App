@@ -20,7 +20,7 @@ export default function MyApp() {
     setCartItems(prevItems => prevItems.filter(item => item.id !== id));
   };
 
-  // Toggle the 'completed' property. Change it from true to false
+  // Toggle the 'completed' property between true & false
   const toggleCompleted = (id: number) => {
     setCartItems(prevItems =>
       prevItems.map(item =>

@@ -12,7 +12,7 @@ export default function ItemList({
 
 }) 
 
-//below items.map iterates over items and display each item in an ItemCard 
+// items.map iterates over items and displays each item in an ItemCard component 
 {
   return (
     <div className="p-3 bg-secondary vh-100">

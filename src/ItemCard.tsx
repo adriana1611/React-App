@@ -1,3 +1,5 @@
+// ItemCard component displays an item with options to mark as completed or delete it.
+
 export default function ItemCard({
   itemName,
   itemId,
@@ -37,7 +39,7 @@ export default function ItemCard({
         </button>
 
 
-        <button // to delete the item from the cart
+        <button // button to delete the item from the cart
           onClick={() => onDelete(itemId)}
           className="btn btn-danger btn-sm"
         >
