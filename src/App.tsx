@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemList from "./ItemList";
 import Sidebar from "./Sidebar";
 import { shoppingItems } from "./data"; 
@@ -8,10 +8,10 @@ export default function MyApp() {
   const [cartItems, setCartItems] = useState(shoppingItems);
 
   // Add item to cart  by updating the state with a copy of the array
-  const addItemToCart = () => {
+  const addItemToCart = (name: string) => {
     setCartItems(prevItems => [
       ...prevItems,
-      shoppingItems[prevItems.length % shoppingItems.length]
+      {id: prevItems.length +1, name, completed: false},
     ]);
   };
 
@@ -28,6 +28,11 @@ export default function MyApp() {
       )
     );
   };
+
+  //Update the document title with the cart item count 
+useEffect(() => {
+ document.title = `Shopping Cart (${cartItems.length} items)`;
+}, [cartItems.length]);
 
   return (
     <div className="d-flex">
