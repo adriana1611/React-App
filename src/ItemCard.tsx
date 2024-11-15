@@ -1,27 +1,31 @@
-// ItemCard component displays an item with options to mark as completed or delete it.
+// ItemCard component displays an individual item in the shopping list. (Options to toggle the completed status, edit the item or delete it.) 
 
 export default function ItemCard({
   itemName,
   itemId,
+  quantity,
   completed,
   onDelete,
-  onToggleCompleted
+  onToggleCompleted,
+  onEdit,
 }:
 
 {
   itemName: string;
   itemId: number;
+  quantity: string;
   completed: boolean;
   onDelete: (id: number) => void;
   onToggleCompleted: () => void;
+  onEdit: () => void;
 })
 
-//below we display item name and its completion status
+//Renders the items details and action buttons
 {
   return (
     <div className="bg-white m-3 p-3 border rounded d-flex justify-content-between align-items-center">
       <span>
-        {itemName}{" "}
+        {itemName} - Quantity: {quantity}{" "}
         {completed ? (
           <span style={{ color: "green" }}>✔️</span> 
         ) : (
@@ -31,11 +35,17 @@ export default function ItemCard({
 
       <div>
         
-        <button // button to toggle the completed status & text change based on completion status 
+        <button //button to toggle the completed status of the item
           onClick={onToggleCompleted}
           className="btn btn-success btn-sm me-2"
         >
           {completed ? "Not Completed" : "Completed"} 
+        </button>
+
+        <button //button to trigger the edit functionality
+        onClick={onEdit}
+        className="btn btn-warning btn-sm me-2">
+          Edit
         </button>
 
 

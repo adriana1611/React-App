@@ -1,31 +1,34 @@
-import {useState, ChangeEvent} from "react";
+import { useState } from "react";
 import AddButton from "./AddButton";
-import SidebarInput from "./SidebarInput";
+import ItemFormModal from "./ItemFormModal";
 
-// Sidebar component provides an interface for adding items to the cart
-export default function Sidebar({addItemToCart,}: {
-  addItemToCart: (name: string) => void;
+//Sidebar component for adding items to the shopping cart
+export default function Sidebar({
+  addItemToCart,
+}: {
+  addItemToCart: (name: string, quantity: string) => void;
 }) {
 
-  const[inputValue, setInputValue] = useState("");
+  //State to control whether the modal is open or closed
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
+  //Function to open the modal
+  const handleOpenModal = () => setIsModalOpen(true);
 
-  const handleAddItem = () => {
-    addItemToCart(inputValue);
-    setInputValue("");
-  };
+  //Function to close the modal
+  const handleCloseModal = () => setIsModalOpen(false);
 
 
-
-//below is the button to add a new item to the cart & sidebar input
-
+  //Add Button that triggers the opening of the modal
+  //ItemFormModal is the modal that appears when adding or editing an item
   return (
     <div className="border-end bg-info p-3 text-white vh-100">
-      <SidebarInput inputValue={inputValue} onInputChange={handleInputChange}/>
-      <AddButton onClick={handleAddItem} />
+      <AddButton onClick={handleOpenModal} />
+      <ItemFormModal
+        show={isModalOpen}
+        handleClose={handleCloseModal}
+        addItemToCart={(name: string) => addItemToCart(name, "1")}
+      />
     </div>
   );
 }
